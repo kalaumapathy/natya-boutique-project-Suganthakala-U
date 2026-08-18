@@ -6,7 +6,7 @@ function App() {
 
   return (
   
-      <h1>"Hello LaunchCode"</h1>
+      <h1>"Hello Natya Boutique project"</h1>
     
   )
 }
