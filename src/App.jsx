@@ -1,14 +1,16 @@
-import { useState } from 'react'
-import './App.css'
+import products from "./data/products";
+import ProductList from "./components/ProductList";
 
 function App() {
- 
-
   return (
-  
-      <h1>"Hello Natya Boutique project"</h1>
-    
-  )
+    <div>
+      <h1>Natya Boutique</h1>
+
+      <h2>Traditional Dance Costumes</h2>
+
+      <ProductList products={products} />
+    </div>
+  );
 }
 
-export default App
+export default App;
