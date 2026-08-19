@@ -4,7 +4,7 @@ const products = [
     name: "Bharatanatyam Costume",
     category: "Bharatanatyam",
     price: 120,
-    image: "/images/costume1.jpg",
+    image: "src/assets/images/costume1.jpg",
     description: "Traditional Bharatanatyam dance costume."
   },
   {
@@ -12,7 +12,7 @@ const products = [
     name: "Kuchipudi Costume",
     category: "Kuchipudi",
     price: 130,
-    image: "/images/costume2.jpg",
+    image: "src/assets/images/costume2.jpg",
     description: "Elegant traditional Kuchipudi dance costume."
   },
   {
@@ -20,7 +20,7 @@ const products = [
     name: "Odissi Costume",
     category: "Odissi",
     price: 125,
-    image: "/images/costume3.jpg",
+    image: "src/assets/images/costume3.jpg",
     description: "Traditional Odissi dance costume."
   },
   {
@@ -28,7 +28,7 @@ const products = [
     name: "Kathak Costume",
     category: "Kathak",
     price: 115,
-    image: "/images/costume4.jpg",
+    image: "src/assets/images/costume4.jpg",
     description: "Beautiful traditional Kathak dance costume."
   }
 ];
