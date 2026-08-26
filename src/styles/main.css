@@ -108,7 +108,7 @@ body {
 
 .product-image.placeholder {
   height: 140px;
-  background: #f3f3f3;
+  background: hsl(129, 100%, 97%);
   margin-bottom: 0.5rem;
 }
 
