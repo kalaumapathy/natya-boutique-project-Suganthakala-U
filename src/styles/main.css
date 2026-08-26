@@ -14,9 +14,12 @@ body {
 
 .main {
   flex: 1; /* ensures footer is pushed down */
-  padding: 1.5rem;
+  padding: clamp(1rem, 3vw, 2rem);
 }
 
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
 /* Navbar */
 .navbar {
   display: flex;
@@ -99,7 +102,7 @@ body {
 }
 
 .product-thumb {
-  width: 200px;
+  width: clamp(160px, 20vw, 220px);
   height: auto;
   border: 1px solid #eee;
   border-radius: 4px;
