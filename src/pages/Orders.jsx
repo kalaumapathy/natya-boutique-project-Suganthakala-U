@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 function Orders() {
-  // In a real app, you’d fetch order history from backend or localStorage
+  
   const location = useLocation();
   const { state } = location || {};
   const orders = state?.orders || [];
@@ -33,4 +33,4 @@ function Orders() {
   );
 }
 
-export default Orders;
+export default Orders; 
