@@ -1,32 +1,45 @@
-import { useParams } from "react-router-dom";
-import { useCart } from "../context/CartContext";
-import PRODUCTS from "../data/Products";
-
-/* const PRODUCTS = [
-  { id: 1, name: "Bharatanatyam Costume – Red & Gold", price: 120, 
-    description: "Handcrafted silk costume with temple border.", image: "/images/costume1.jpg" },
-  { id: 2, name: "Temple Jewelry Set – Kemp Stones", price: 80, 
-    description: "Traditional kemp stone jewelry set for Bharatanatyam.", image: "/images/jewelry.jpg" },
-  { id: 3, name: "Ghungroo Anklets – 100 Bells", price: 35, 
-    description: "Pair of ghungroos with 100 brass bells.", image: "/images/ghungroo.jpg" }
-]; */
+import { Link, useParams } from "react-router-dom";
+import Button from "../components/Button";
+import catalog from "../data/catalog";
+import useCart from "../hooks/useCart";
 
 function ProductDetail() {
   const { id } = useParams();
   const { addToCart } = useCart();
 
-  const product = PRODUCTS.find((p) => p.id === Number(id));
-  if (!product) return <p>Product not found.</p>;
+  const product = catalog.find((item) => item.id === Number(id));
+
+  if (!product) {
+    return (
+      <section className="page empty-state">
+        <div className="not-found-icon">🔍</div>
+        <h1>Product Not Found</h1>
+        <p>That product is not available in the Natya Boutique catalog.</p>
+        <Link to="/browse" className="btn-primary">
+          Back to Browse
+        </Link>
+      </section>
+    );
+  }
 
   return (
     <section className="page product-detail">
       <div className="product-detail-container">
-        <img src={product.image} alt={product.name} className="product-detail-image" />
+        <img
+          src={product.image}
+          alt={product.name}
+          className="product-detail-image"
+        />
+
         <div className="product-detail-info">
-          <h2>{product.name}</h2>
-          <p className="price">${product.price}</p>
+          <p className="product-category">{product.category}</p>
+          <h1>{product.name}</h1>
+          <p className="price">${product.price.toFixed(2)}</p>
           <p>{product.description}</p>
-          <button className="btn-primary" onClick={() => addToCart(product)}> Add to Cart </button>
+
+          <Button onClick={() => addToCart(product)}>
+            Add to Cart
+          </Button>
         </div>
       </div>
     </section>

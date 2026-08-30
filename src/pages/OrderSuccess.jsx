@@ -4,6 +4,21 @@ import { useLocation, Link } from "react-router-dom";
 function OrderSuccess() {
   const location = useLocation();
   const { formData, cartItems, cartTotal } = location.state || {};
+  const hasOrderDetails = formData && Array.isArray(cartItems) && typeof cartTotal === "number";
+
+  if (!hasOrderDetails) {
+    return (
+      <section className="page empty-state">
+        <h1>Order Details Unavailable</h1>
+        <p>Please complete checkout before viewing an order confirmation.</p>
+        <Link to="/browse" className="btn-primary">
+          Browse Costumes
+        </Link>
+      </section>
+    );
+  }
+
+
 
   return (
     <section className="page order-success">
@@ -13,7 +28,7 @@ function OrderSuccess() {
         <p>Your order has been placed successfully.</p>
 
         <div className="order-summary">
-          <h3>Order Summary</h3>
+          <h2>Order Summary</h2>
           <ul>
             {cartItems?.map((item) => (
               <li key={item.id}>

@@ -1,13 +1,13 @@
-import React from "react";
-import { useCart } from "../context/CartContext";
+import useCart from "../hooks/useCart";
 import { Link } from "react-router-dom";
+import Button from "../components/Button";
 
 function Cart() {
   const { cartItems, updateQuantity, removeFromCart, cartTotal } = useCart();
 
   return (
     <section className="page cart">
-      <h2>Your Cart</h2>
+      <h1>Your Cart</h1>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -39,7 +39,7 @@ function Cart() {
                   </td>
                   <td>${item.price * item.quantity}</td>
                   <td>
-                    <button className="btn-link" onClick={() => removeFromCart(item.id)}>Remove</button>
+                    <Button variant="link" onClick={() => removeFromCart(item.id)}>Remove</Button>
                   </td>
                 </tr>
               ))}
@@ -49,7 +49,6 @@ function Cart() {
             <strong>Total: ${cartTotal}</strong>
           </div>
 
-          {/*  Proceed to Checkout button */}
           <div className="checkout-action">
             <Link to="/checkout" className="btn-primary">
               Proceed to Checkout

@@ -1,21 +1,36 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext";
-import PRODUCTS from "../data/Products";
+import { useState } from "react";
+import useCart from "../hooks/useCart";
+import ProductCard from "../components/ProductCard";
+import Button from "../components/Button";
+import SearchBar from "../components/SearchBar";
+import catalog from "../data/catalog";
 
-/* const PRODUCTS = [
-  { id: 1, name: "Bharatanatyam Costume – Red & Gold", price: 120, image: "/images/costume1.jpg" },
-  { id: 2, name: "Temple Jewelry Set – Kemp Stones", price: 80, image: "/images/jewelry.jpg" },
-  { id: 3, name: "Ghungroo Anklets – 100 Bells", price: 35, image: "/images/ghungroo.jpg" }
-];
- */
 function Browse() {
   const { addToCart } = useCart();
   const [messages, setMessages] = useState({});
+  const [searchInput, setSearchInput] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+
+  const filteredProducts = catalog.filter((product) => {
+    if (!normalizedSearch) {
+      return true;
+    }
+
+    return [product.name, product.category, product.description].some(
+      (field) => field?.toLowerCase().includes(normalizedSearch)
+    );
+  });
 
   const handleAdd = (product) => {
     addToCart(product);
-    setMessages((prev) => ({ ...prev, [product.id]: `${product.name} added to your cart!` }));
+
+    setMessages((prev) => ({
+      ...prev,
+      [product.id]: `${product.name} added to your cart!`,
+    }));
+
     setTimeout(() => {
       setMessages((prev) => {
         const updated = { ...prev };
@@ -25,24 +40,60 @@ function Browse() {
     }, 2000);
   };
 
+  const handleSearch = () => {
+    setSearchTerm(searchInput);
+  };
+
   return (
     <section className="page browse">
-      <h2>Browse Costumes & Accessories</h2>
-      <div className="product-grid">
-        {PRODUCTS.map((product) => (
-          <div key={product.id} className="product-card">
-            <Link to={`/product/${product.id}`} className="product-link">
-              <img src={product.image} alt={product.name} className="product-thumb" />
-              <h3>{product.name}</h3>
-              <p>${product.price}</p>
-            </Link>
-            <button className="btn-secondary" onClick={() => handleAdd(product)}>
-              Add to Cart
-            </button>
-            {messages[product.id] && <p className="cart-message">{messages[product.id]}</p>}
-          </div>
-        ))}
-      </div>
+      <p className="eyebrow">Natya Boutique</p>
+      <h1>Browse Costumes & Accessories</h1>
+
+      <SearchBar
+        value={searchInput}
+        onChange={setSearchInput}
+        onSearch={handleSearch}
+        onClear={() => {
+          setSearchInput("");
+          setSearchTerm("");
+        }}
+      />
+
+      <p className="search-results-count" aria-live="polite">
+        {filteredProducts.length}{" "}
+        {filteredProducts.length === 1 ? "product" : "products"} found
+      </p>
+
+      {filteredProducts.length > 0 ? (
+        <div className="product-grid">
+          {filteredProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToCart={handleAdd}
+              message={messages[product.id]}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="empty-state" role="status">
+          <div className="not-found-icon">🔍</div>
+          <h2>Product Not Found</h2>
+          <p>
+            We couldn't find a product matching{" "}
+            <strong>"{searchTerm}"</strong>.
+          </p>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setSearchInput("");
+              setSearchTerm("");
+            }}
+          >
+            Show All Products
+          </Button>
+        </div>
+      )}
     </section>
   );
 }

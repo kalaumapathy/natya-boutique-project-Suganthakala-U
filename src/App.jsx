@@ -11,6 +11,7 @@ import OrderSuccess from "./pages/OrderSuccess";
 import Orders from "./pages/Orders";
 import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
+import SearchResults from "./pages/SearchResults";
 import { CartProvider } from "./context/CartContext";
 
 function App() {
@@ -18,11 +19,13 @@ function App() {
     <CartProvider>
       <div className="app-container">
         <Navbar />
+
         <main className="main">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/browse" element={<Browse />} />
             <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/search" element={<SearchResults />} />
             <Route path="/cart" element={<ViewCart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/order-success" element={<OrderSuccess />} />
@@ -32,6 +35,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
+
         <Footer />
       </div>
     </CartProvider>
