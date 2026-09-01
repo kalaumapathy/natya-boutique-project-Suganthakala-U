@@ -28,17 +28,7 @@ function Header() {
         <a href="/accessories">Accessories</a>
         <a href="/orders">Orders</a>
       </nav>
-
-      <form className="search-form" onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-
-        <button type="submit">Search</button>
-      </form>
+ 
     </header>
   );
 }

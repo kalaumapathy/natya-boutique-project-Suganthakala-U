@@ -63,7 +63,7 @@
    Search Form
 ================================ */
 
-.search-form {
+ .search-form {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -93,31 +93,6 @@
   box-shadow: 0 0 0 3px rgba(181, 101, 29, 0.12);
 }
 
-/* ================================
-   Search Button
-================================ */
-
-.search-form button {
-  height: 40px;
-  padding: 0 17px;
-  border: none;
-  border-radius: 6px;
-  background-color: #8b5e3c;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.search-form button:hover {
-  background-color: #6f472d;
-  transform: translateY(-1px);
-}
-
-.search-form button:active {
-  transform: translateY(0);
-}
 
 /* ================================
    Mobile / Tablet

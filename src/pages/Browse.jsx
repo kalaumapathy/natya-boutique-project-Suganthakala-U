@@ -46,8 +46,7 @@ function Browse() {
 
   return (
     <section className="page browse">
-      <p className="eyebrow">Natya Boutique</p>
-      <h1>Browse Costumes & Accessories</h1>
+            <h1>Browse Costumes & Accessories</h1>
 
       <SearchBar
         value={searchInput}
