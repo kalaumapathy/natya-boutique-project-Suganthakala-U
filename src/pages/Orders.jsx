@@ -1,30 +1,34 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 function Orders() {
-  
-  const location = useLocation();
-  const { state } = location || {};
-  const orders = state?.orders || [];
+  const { orders } = useCart();
 
   return (
     <section className="page orders">
-      <h2>My Orders</h2>
+      <h1>My Orders</h1>
       {orders.length === 0 ? (
-        <p>You have no past orders yet.</p>
+        <div className="empty-state">
+          <p>You have no past orders yet.</p>
+          <Link to="/browse" className="btn-primary">
+            Browse Products
+          </Link>
+        </div>
       ) : (
         <ul>
-          {orders.map((order, index) => (
-            <li key={index}>
-              <strong>Order #{index + 1}</strong>
+          {orders.map((order) => (
+            <li key={order.id}>
+              <strong>Order {order.id}</strong>
+              <p>{new Date(order.createdAt).toLocaleDateString()}</p>
               <ul>
-                {order.cartItems.map((item) => (
+                {order.items.map((item) => (
                   <li key={item.id}>
-                    {item.name} x {item.quantity} — ${item.price * item.quantity}
+                    {item.name} x {item.quantity} — $
+                    {(item.price * item.quantity).toFixed(2)}
                   </li>
                 ))}
               </ul>
-              <p>Total: ${order.cartTotal.toFixed(2)}</p>
+              <p>Total: ${order.total.toFixed(2)}</p>
             </li>
           ))}
         </ul>
@@ -33,4 +37,4 @@ function Orders() {
   );
 }
 
-export default Orders; 
+export default Orders;

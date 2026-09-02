@@ -18,8 +18,8 @@ function Browse() {
       return true;
     }
 
-    return [product.name, product.category, product.description].some(
-      (field) => field?.toLowerCase().includes(normalizedSearch)
+    return [product.name, product.category, product.description].some((field) =>
+      field?.toLowerCase().includes(normalizedSearch),
     );
   });
 
@@ -46,7 +46,7 @@ function Browse() {
 
   return (
     <section className="page browse">
-            <h1>Browse Costumes & Accessories</h1>
+      <h1>Browse Costumes & Accessories</h1>
 
       <SearchBar
         value={searchInput}
@@ -79,8 +79,7 @@ function Browse() {
           <div className="not-found-icon">🔍</div>
           <h2>Product Not Found</h2>
           <p>
-            We couldn't find a product matching{" "}
-            <strong>"{searchTerm}"</strong>.
+            We couldn't find a product matching <strong>"{searchTerm}"</strong>.
           </p>
           <Button
             variant="secondary"

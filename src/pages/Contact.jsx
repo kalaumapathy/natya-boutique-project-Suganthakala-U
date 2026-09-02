@@ -85,7 +85,9 @@ function Contact() {
               onChange={handleChange}
               placeholder="you@example.com"
               aria-invalid={Boolean(errors.email)}
-              aria-describedby={errors.email ? "contact-email-error" : undefined}
+              aria-describedby={
+                errors.email ? "contact-email-error" : undefined
+              }
             />
           </label>
           {errors.email && (
@@ -123,39 +125,3 @@ function Contact() {
 }
 
 export default Contact;
-
-
-
-
-
-
-/* import React from "react";
-import Button from "../components/Button";
-
-function Contact() {
-  return (
-    <section className="page contact">
-      <h2>Contact Us</h2>
-      <form className="contact-form">
-        <label>
-          Name
-          <input type="text" placeholder="Your name" />
-        </label>
-        <label>
-          Email
-          <input type="email" placeholder="you@example.com" />
-        </label>
-        <label>
-          Message
-          <textarea placeholder="Tell us what you need" />
-        </label>
-        <button type="submit" className="btn-primary">
-          Send
-        </button>
-      </form>
-    </section>
-  );
-}
-
-export default Contact;
- */

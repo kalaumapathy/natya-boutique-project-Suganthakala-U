@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
 import Button from "../components/Button";
 import catalog from "../data/catalog";
 import useCart from "../hooks/useCart";
@@ -6,6 +7,7 @@ import useCart from "../hooks/useCart";
 function ProductDetail() {
   const { id } = useParams();
   const { addToCart } = useCart();
+  const [message, setMessage] = useState("");
 
   const product = catalog.find((item) => item.id === Number(id));
 
@@ -37,9 +39,19 @@ function ProductDetail() {
           <p className="price">${product.price.toFixed(2)}</p>
           <p>{product.description}</p>
 
-          <Button onClick={() => addToCart(product)}>
+          <Button
+            onClick={() => {
+              addToCart(product);
+              setMessage(`${product.name} added to your cart!`);
+            }}
+          >
             Add to Cart
           </Button>
+          {message && (
+            <p className="status-message" role="status">
+              {message}
+            </p>
+          )}
         </div>
       </div>
     </section>

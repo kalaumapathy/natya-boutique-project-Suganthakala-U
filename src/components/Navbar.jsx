@@ -40,7 +40,7 @@ function Navbar() {
         <NavLink to="/contact">Contact</NavLink>
       </nav>
 
-      {/*  <form className="navbar-search" role="search" onSubmit={handleSearch}>
+      <form className="navbar-search" role="search" onSubmit={handleSearch}>
         <input
           type="search"
           value={searchTerm}
@@ -49,8 +49,8 @@ function Navbar() {
           aria-label="Search products"
         />
         <button type="submit">Search</button>
-      </form> */}
- 
+      </form>
+
       <button
         className="hamburger"
         type="button"

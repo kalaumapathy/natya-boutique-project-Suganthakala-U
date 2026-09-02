@@ -40,7 +40,7 @@ function validateField(name, value) {
 }
 
 function Checkout() {
-  const { cartItems, cartTotal } = useCart();
+  const { cartItems, cartTotal, placeOrder } = useCart();
   const [formData, setFormData] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -71,13 +71,18 @@ function Checkout() {
     const nextErrors = Object.fromEntries(
       Object.entries(formData)
         .map(([name, value]) => [name, validateField(name, value)])
-        .filter(([, error]) => error)
+        .filter(([, error]) => error),
     );
 
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length === 0) {
-      navigate("/order-success", { state: { formData, cartItems, cartTotal } });
+      try {
+        const order = placeOrder(formData);
+        navigate("/order-success", { state: { order } });
+      } catch (error) {
+        setErrors({ form: error.message });
+      }
     }
   };
 
@@ -105,6 +110,12 @@ function Checkout() {
           <form className="checkout-form" onSubmit={handleSubmit} noValidate>
             <h2>Customer Details</h2>
 
+            {errors.form && (
+              <p className="field-error" role="alert">
+                {errors.form}
+              </p>
+            )}
+
             <label htmlFor="checkout-name">
               Name
               <input
@@ -115,7 +126,9 @@ function Checkout() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 aria-invalid={Boolean(errors.name)}
-                aria-describedby={errors.name ? "checkout-name-error" : undefined}
+                aria-describedby={
+                  errors.name ? "checkout-name-error" : undefined
+                }
               />
             </label>
             {errors.name && (
@@ -134,7 +147,9 @@ function Checkout() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 aria-invalid={Boolean(errors.email)}
-                aria-describedby={errors.email ? "checkout-email-error" : undefined}
+                aria-describedby={
+                  errors.email ? "checkout-email-error" : undefined
+                }
               />
             </label>
             {errors.email && (
@@ -153,7 +168,9 @@ function Checkout() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 aria-invalid={Boolean(errors.address)}
-                aria-describedby={errors.address ? "checkout-address-error" : undefined}
+                aria-describedby={
+                  errors.address ? "checkout-address-error" : undefined
+                }
               />
             </label>
             {errors.address && (
@@ -171,7 +188,9 @@ function Checkout() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 aria-invalid={Boolean(errors.payment)}
-                aria-describedby={errors.payment ? "checkout-payment-error" : undefined}
+                aria-describedby={
+                  errors.payment ? "checkout-payment-error" : undefined
+                }
               >
                 <option value="">Select</option>
                 <option value="credit">Credit Card</option>

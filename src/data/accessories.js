@@ -14,8 +14,7 @@ const accessories = [
     category: "Accessories",
     price: 34.99,
     image: "/images/ghungroo.jpg",
-    description:
-      "Traditional ghungroos designed for classical Indian dance.",
+    description: "Traditional ghungroos designed for classical Indian dance.",
   },
   {
     id: 7,
@@ -23,8 +22,7 @@ const accessories = [
     category: "Accessories",
     price: 24.99,
     image: "/images/hair-accessories.jpg",
-    description:
-      "Traditional hair accessories to complete your dance look.",
+    description: "Traditional hair accessories to complete your dance look.",
   },
   {
     id: 8,
@@ -32,8 +30,7 @@ const accessories = [
     category: "Accessories",
     price: 29.99,
     image: "/images/dance-belt.jpg",
-    description:
-      "Decorative dance belt for classical Indian dance costumes.",
+    description: "Decorative dance belt for classical Indian dance costumes.",
   },
 ];
 

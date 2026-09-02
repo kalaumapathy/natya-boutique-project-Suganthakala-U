@@ -30,7 +30,10 @@
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease;
 }
 
 .btn-primary {
@@ -122,7 +125,9 @@
   border-radius: 14px;
   background: var(--white);
   box-shadow: 0 5px 20px rgba(59, 31, 74, 0.07);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .product-card:hover {
@@ -504,7 +509,6 @@
   font-weight: 600;
 }
 
-
 .empty-state {
   padding: clamp(1.5rem, 4vw, 2.5rem);
   border: 1px solid #ece5ed;
@@ -524,7 +528,6 @@
     width: 100%;
   }
 }
-
 
 /* ================================
    GLOBAL PRODUCT SEARCH

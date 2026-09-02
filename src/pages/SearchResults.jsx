@@ -1,9 +1,12 @@
 import { useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import catalog from "../data/catalog";
+import ProductCard from "../components/ProductCard";
+import useCart from "../hooks/useCart";
 
 function SearchResults() {
   const [searchParams] = useSearchParams();
+  const { addToCart } = useCart();
   const query = searchParams.get("query") || "";
 
   const searchResults = useMemo(() => {
@@ -15,7 +18,7 @@ function SearchResults() {
 
     return catalog.filter((product) => {
       return [product.name, product.category, product.description].some(
-        (field) => field?.toLowerCase().includes(searchText)
+        (field) => field?.toLowerCase().includes(searchText),
       );
     });
   }, [query]);
@@ -42,8 +45,8 @@ function SearchResults() {
             <strong>"{query}"</strong>.
           </p>
           <p className="not-found-help">
-            Try searching for Bharatanatyam, Kuchipudi, Odissi, Kathak,
-            jewelry, ghungroos, hair accessories, or dance belt.
+            Try searching for Bharatanatyam, Kuchipudi, Odissi, Kathak, jewelry,
+            ghungroos, hair accessories, or dance belt.
           </p>
 
           <Link to="/browse" className="btn-primary">
@@ -59,29 +62,11 @@ function SearchResults() {
 
           <div className="product-grid">
             {searchResults.map((product) => (
-              <article className="product-card" key={product.id}>
-                <Link
-                  to={`/product/${product.id}`}
-                  className="product-link"
-                >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="product-thumb"
-                  />
-
-                  <div className="product-card-body">
-                    <p className="product-category">{product.category}</p>
-                    <h2>{product.name}</h2>
-                    <p className="product-description">
-                      {product.description}
-                    </p>
-                    <p className="product-price">
-                      ${product.price.toFixed(2)}
-                    </p>
-                  </div>
-                </Link>
-              </article>
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={addToCart}
+              />
             ))}
           </div>
         </>
